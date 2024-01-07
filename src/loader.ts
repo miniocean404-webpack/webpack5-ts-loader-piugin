@@ -19,32 +19,34 @@
 //   },
 // };
 
-module.exports = function (source) {
-  console.log(1, 2);
+import { LoaderContext } from "webpack";
 
+export default function (this: LoaderContext<any>, source: string, inputSourceMap?: Record<string, any>) {
   // this.resourcePath为当前编译文件的源路径
   const res = codeLineTrack(source, this.resourcePath);
   return res;
-};
+}
 
 const codeLineTrack = (code: string, path: string) => {
   const lineList = code.split("\n");
-  const newList = [];
+  const newList: string[] = [];
   lineList.forEach((item, index) => {
     newList.push(addLineAttr(item, index + 1, path)); // 添加位置属性，index+1为具体的代码行号
   });
   return newList.join("\n");
 };
 
-const addLineAttr = (lineStr: string, line: number, path: string) => {
+const addLineAttr = (lineStr: string, line: number, path: string): string => {
   if (!/^\s+</.test(lineStr)) {
     return lineStr;
   }
 
   const reg = /((((^(\s)+\<))|(^\<))[\w-]+)|(<\/template)/g;
-  let leftTagList = lineStr.match(reg);
+  let leftTagList: RegExpMatchArray | string[] | null = lineStr.match(reg);
+
   if (leftTagList) {
     leftTagList = Array.from(new Set(leftTagList));
+
     leftTagList.forEach((item) => {
       const skip = ["KeepAlive", "template", "keep-alive", "transition", "router-view"];
       if (item && !skip.some((i) => item.indexOf(i) > -1)) {

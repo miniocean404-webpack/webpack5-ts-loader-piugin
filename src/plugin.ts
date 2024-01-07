@@ -11,22 +11,40 @@
 
 // position-plugin.js
 
-import http from "http";
+// enhanced-resolve:https://zhuanlan.zhihu.com/p/609600425
+// https://juejin.cn/post/7306716962138538036?searchId=20240107191848D96443ADF0397CC7DB72
+
+import http, { Server } from "http";
 import child_process from "child_process";
+import { Compiler } from "webpack";
+
+interface PluginOptionProp {
+  port: number;
+}
 
 class codePositionServer {
-  constructor(options) {
+  server: Server | undefined;
+  options: PluginOptionProp;
+
+  constructor(options: PluginOptionProp) {
     this.options = options;
-    this.server = null;
+    this.server = undefined;
   }
 
-  apply(compiler) {
-    // 挂在一个钩子
+  // compiler 包含了 当前 webpack 环境的各种配置信息，以及关于模块和编译的所有信息。
+  apply(compiler: Compiler) {
+    // 通过 compiler.hooks.compilation 拿到对应钩子
+    // 通过 tap 方法来注册回调
     compiler.hooks.done.tap("codePositionServer", (compilation) => {
+      // 在回调函数中拿到参数 compilation
+      // 执行一些逻辑
+
       const { port } = this.options;
       if (this.server) return;
 
-      this.server = http.createServer((req, res) => {
+      this.server = http.createServer((req, _) => {
+        if (!req.url) return;
+
         const code = req.url.split("?")[1];
 
         if (code.length) {
@@ -44,4 +62,4 @@ class codePositionServer {
   }
 }
 
-module.exports = codePositionServer;
+export default codePositionServer;

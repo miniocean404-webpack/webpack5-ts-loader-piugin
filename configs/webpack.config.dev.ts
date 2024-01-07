@@ -18,6 +18,7 @@ const config: Configuration = {
   entry: {
     loader: { import: "loader.ts", filename: "lib/[name].js" },
     plugin: { import: "plugin.ts", filename: "lib/[name].js" },
+    web: { import: "web.ts", filename: "lib/[name].js" },
   },
   output: {
     publicPath: "./",
