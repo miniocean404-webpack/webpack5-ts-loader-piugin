@@ -16,13 +16,13 @@ const config: Configuration = {
   mode: "development",
   devtool: "source-map",
   entry: {
-    loader: { import: "loader.ts", filename: "lib/[name].js" },
-    plugin: { import: "plugin.ts", filename: "lib/[name].js" },
-    web: { import: "web.ts", filename: "lib/[name].js" },
+    loader: { import: "loader.ts", filename: "[name].js" },
+    plugin: { import: "plugin.ts", filename: "[name].js" },
+    web: { import: "web.ts", filename: "[name].js" },
   },
   output: {
     publicPath: "./",
-    path: webpackPaths.buildPath,
+    path: webpackPaths.libPath,
     filename: "[name].[contenthash:5].js",
     chunkFilename: "[id].js",
     library: {
