@@ -18,7 +18,7 @@ import http, { Server } from "http";
 import child_process from "child_process";
 import { Compiler } from "webpack";
 
-interface PluginOptionProp {
+export interface PluginOptionProp {
   port: number;
 }
 

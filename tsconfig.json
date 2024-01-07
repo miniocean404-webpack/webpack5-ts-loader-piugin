@@ -12,12 +12,19 @@
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
 
-    /* Bundler mode */
+    // 生成类型声明文件
+    "declaration": true,
+    "declarationDir": "./lib/types",
+    "declarationMap": false,
+    "rootDir": "./src", // 指定源文件的根文件夹
+
+    /* Node mode */
     "moduleResolution": "Node",
-    "allowImportingTsExtensions": true,
+    "allowImportingTsExtensions": true, // 允许 ts 文件相互导入
+    "emitDeclarationOnly": true, // 输出 .d.ts 不输出 js 文件
+    "noEmit": false, // 不输出文件
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
 
     /* Linting */
     "strict": true,
@@ -25,9 +32,10 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    "allowJs": true,
     "sourceMap": true,
     "esModuleInterop": true,
     "baseUrl": "./"
   },
-  "include": ["./**/*.ts", "configs/webpack.*.ts", "babel.config.js"]
+  "include": ["./src/**/*.ts"]
 }

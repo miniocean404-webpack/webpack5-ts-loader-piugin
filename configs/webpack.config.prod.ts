@@ -6,8 +6,8 @@ import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import nodeExternals from "webpack-node-externals";
 
-import webpackPaths from "./webpack.paths";
-import baseConfig from "./webpack.base";
+import webpackPaths from "./webpack.paths.ts";
+import baseConfig from "./webpack.base.ts";
 
 const config: Configuration = {
   // 对于 entry 及 loader 的绝对路径 使用 context 作为基础路径
@@ -17,8 +17,8 @@ const config: Configuration = {
   mode: "production",
   devtool: "inline-source-map",
   entry: {
-    loader: { import: "loader.ts", filename: "[name].js" },
-    plugin: { import: "plugin.ts", filename: "[name].js" },
+    loader: { import: "./loader/index.ts", filename: "[name].js" },
+    plugin: { import: "./plugin/index.ts", filename: "[name].js" },
     web: { import: "web.ts", filename: "[name].js" },
   },
   output: {

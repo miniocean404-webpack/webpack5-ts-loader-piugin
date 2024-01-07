@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "commonjs",
+  "exports": {
+    "./plugin": "./lib/plugin.js",
+    "./loader": "./lib/loader.js",
+    "./web": "./lib/web.js"
+  },
   "scripts": {
     "dev": "webpack --config ./configs/webpack.config.dev.ts --progress",
     "build": "webpack --config ./configs/webpack.config.prod.ts",
