@@ -6,8 +6,8 @@ import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import nodeExternals from "webpack-node-externals";
 
-import webpackPaths from "./webpack.paths.ts";
-import baseConfig from "./webpack.base.ts";
+import webpackPaths from "./webpack.paths";
+import baseConfig from "./webpack.base";
 
 const config: Configuration = {
   // 对于 entry 及 loader 的绝对路径 使用 context 作为基础路径

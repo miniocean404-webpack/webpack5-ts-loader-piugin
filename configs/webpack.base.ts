@@ -1,6 +1,6 @@
 import webpack, { Configuration } from "webpack";
 
-import webpackPaths from "./webpack.paths.ts";
+import webpackPaths from "./webpack.paths";
 
 const config: Configuration = {
   // 让你更精确地控制 bundle 信息该怎么显示。 如果你不希望使用 quiet 或 noInfo 这样的不显示信息，而是又不想得到全部的信息，
@@ -23,7 +23,7 @@ const config: Configuration = {
         use: {
           loader: "ts-loader",
           options: {
-            transpileOnly: true,
+            // transpileOnly: true,
             compilerOptions: {
               module: "esnext",
             },

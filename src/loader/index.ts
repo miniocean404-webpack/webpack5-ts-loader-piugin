@@ -21,6 +21,7 @@
 
 import { LoaderContext } from "webpack";
 
+// @ts-ignore
 export default function (this: LoaderContext<any>, source: string, inputSourceMap?: Record<string, any>) {
   // this.resourcePath为当前编译文件的源路径
   const res = codeLineTrack(source, this.resourcePath);

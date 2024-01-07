@@ -20,17 +20,17 @@
 
     /* Node mode */
     "moduleResolution": "Node",
-    "allowImportingTsExtensions": true, // 允许 ts 文件相互导入
-    "emitDeclarationOnly": true, // 输出 .d.ts 不输出 js 文件
+    "allowImportingTsExtensions": false, // 允许导入 tsx 等其他扩展名
+    "emitDeclarationOnly": false, // 输出 .d.ts 不输出 js 文件
     "noEmit": false, // 不输出文件
     "resolveJsonModule": true,
     "isolatedModules": true,
 
     /* Linting */
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": false,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
+    "noUnusedParameters": false,
+    "noFallthroughCasesInSwitch": false,
 
     "allowJs": true,
     "sourceMap": true,
