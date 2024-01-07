@@ -11,6 +11,9 @@ devDependencies:
   '@types/webpack-bundle-analyzer':
     specifier: ^4.6.3
     version: 4.6.3(webpack-cli@5.1.4)
+  '@types/webpack-node-externals':
+    specifier: ^3.0.4
+    version: 3.0.4(webpack-cli@5.1.4)
   babel-plugin-import:
     specifier: ^1.13.8
     version: 1.13.8
@@ -47,6 +50,9 @@ devDependencies:
   webpack-merge:
     specifier: ^5.10.0
     version: 5.10.0
+  webpack-node-externals:
+    specifier: ^3.0.0
+    version: 3.0.0
 
 packages:
 
@@ -314,6 +320,18 @@ packages:
     dependencies:
       '@types/node': 20.10.6
       tapable: 2.2.1
+      webpack: 5.89.0(webpack-cli@5.1.4)
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+      - webpack-cli
+    dev: true
+
+  /@types/webpack-node-externals@3.0.4(webpack-cli@5.1.4):
+    resolution: {integrity: sha512-8Z3/edqxE3RRlOJwKSgOFxLZRt/i1qFlv/Bi308ZUKo9jh8oGngd9r8GR0ZNKW5AEJq8QNQE3b17CwghTjQ0Uw==}
+    dependencies:
+      '@types/node': 20.10.6
       webpack: 5.89.0(webpack-cli@5.1.4)
     transitivePeerDependencies:
       - '@swc/core'
@@ -2637,6 +2655,11 @@ packages:
       clone-deep: 4.0.1
       flat: 5.0.2
       wildcard: 2.0.1
+    dev: true
+
+  /webpack-node-externals@3.0.0:
+    resolution: {integrity: sha512-LnL6Z3GGDPht/AigwRh2dvL9PQPFQ8skEpVrWZXLWBYmqcaojHNN0onvHzie6rq7EWKrrBfPYqNEzTJgiwEQDQ==}
+    engines: {node: '>=6'}
     dev: true
 
   /webpack-sources@3.2.3:
