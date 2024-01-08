@@ -16,8 +16,8 @@ const config: Configuration = {
   mode: "development",
   devtool: "source-map",
   entry: {
-    loader: { import: "./loader/index.ts", filename: "[name].js" },
-    plugin: { import: "./plugin/index.ts", filename: "[name].js" },
+    loader: { import: "./loader/index.ts", filename: "loader/[name].js" },
+    plugin: { import: "./plugin/index.ts", filename: "plugin/[name].js" },
     web: { import: "web.ts", filename: "[name].js" },
   },
   output: {
