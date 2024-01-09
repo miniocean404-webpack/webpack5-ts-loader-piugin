@@ -2,7 +2,6 @@ import webpack, { Configuration } from "webpack";
 import { merge } from "webpack-merge";
 
 import TerserPlugin from "terser-webpack-plugin";
-import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 import nodeExternals from "webpack-node-externals";
 
@@ -25,6 +24,7 @@ const config: Configuration = {
     publicPath: "./",
     path: webpackPaths.libPath,
     chunkFilename: "[id].[contenthash:5].js",
+    clean: true, // webpack4需要配置clean-webpack-plugin来删除dist文件,webpack5内置了
     library: {
       type: "umd",
       // 指定的就是你使用require时的模块名
@@ -41,8 +41,6 @@ const config: Configuration = {
       analyzerMode: process.env.ANALYZE === "true" ? "server" : "disabled",
     }),
 
-    // 编译后清理构建产物
-    new CleanWebpackPlugin(),
     // 环境变量注入
     new webpack.EnvironmentPlugin({
       debug: true,
