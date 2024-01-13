@@ -25,7 +25,7 @@ const config: Configuration = {
           options: {
             // transpileOnly: true,
             compilerOptions: {
-              module: "esnext",
+              module: "NodeNext",
             },
           },
         },
