@@ -55,9 +55,7 @@ export class codePositionServer {
         }
       });
 
-      this.server.listen(port, () => {
-        console.log(`codePositionServer started on port ${port}`);
-      });
+      this.server.listen(port, () => console.log(`codePositionServer 插件开启在端口 ${port}`));
     });
   }
 }

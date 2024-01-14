@@ -16,24 +16,50 @@ const config: Configuration = {
   mode: "development",
   devtool: "source-map",
   entry: {
-    loader: { import: "./loader/index.ts", filename: "loader/[name].js" },
-    plugin: { import: "./plugin/index.ts", filename: "plugin/[name].js" },
-    web: { import: "web.ts", filename: "[name].js" },
+    loader: {
+      import: "./loader/index.ts",
+      filename: "loader/[name].js",
+      library: {
+        type: "umd2",
+        // 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define
+        umdNamedDefine: true,
+        // 指定的就是你使用require时的模块名
+        name: "MyLibrary",
+        // 默认导出为 default
+        export: "default",
+      },
+    },
+    plugin: {
+      import: "./plugin/index.ts",
+      filename: "plugin/[name].js",
+      library: {
+        type: "umd2",
+        // 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define
+        umdNamedDefine: true,
+        // 指定的就是你使用require时的模块名
+        name: "MyLibrary",
+        // 默认导出为 default
+        // export: "default",
+      },
+    },
+    web: {
+      import: "web.ts",
+      filename: "[name].js",
+      library: {
+        type: "umd2",
+        // 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define
+        umdNamedDefine: true,
+        // 指定的就是你使用require时的模块名
+        name: "MyLibrary",
+      },
+    },
   },
   output: {
     publicPath: "./",
     path: webpackPaths.libPath,
     filename: "[name].[contenthash:5].js",
     chunkFilename: "[id].js",
-    library: {
-      type: "umd2",
-      // 指定的就是你使用require时的模块名
-      name: "MyLibrary",
-      // 默认导出为 default
-      export: "default",
-      // 会对 UMD 的构建过程中的 AMD 模块进行命名。否则就使用匿名的 define
-      umdNamedDefine: true,
-    },
+    library: {},
   },
   plugins: [
     // 环境变量注入
