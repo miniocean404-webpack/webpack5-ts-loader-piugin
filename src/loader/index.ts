@@ -21,41 +21,41 @@
 
 import { LoaderContext } from "webpack";
 
-// @ts-ignore
-export default function (this: LoaderContext<any>, source: string, inputSourceMap?: Record<string, any>) {
-  // this.resourcePath为当前编译文件的源路径
-  const res = codeLineTrack(source, this.resourcePath);
-  return res;
+interface LoaderOption {
+  frame: "react" | "vue";
+}
+
+// 插件无法应用与懒加载的页面
+export default function (this: LoaderContext<LoaderOption>, source: string, inputSourceMap?: Record<string, any>) {
+  if (typeof this.query !== "string") {
+    this.query.frame;
+
+    // this.resourcePath 为当前编译文件的源路径
+    // this.query 是 loader 传入的 option
+    const res = codeLineTrack(source, this.resourcePath);
+    return res;
+  }
 }
 
 const codeLineTrack = (code: string, path: string) => {
-  const lineList = code.split("\n");
-  const newList: string[] = [];
-  lineList.forEach((item, index) => {
-    newList.push(addLineAttr(item, index + 1, path)); // 添加位置属性，index+1为具体的代码行号
-  });
-  return newList.join("\n");
+  let lineList = code.split("\n");
+
+  // 添加位置属性，index+1为具体的代码行号
+  lineList = lineList.map((item, index) => addLineAttr(item, index + 1, path));
+
+  return lineList.join("\n");
 };
 
 const addLineAttr = (lineStr: string, line: number, path: string): string => {
-  if (!/^\s+</.test(lineStr)) {
-    return lineStr;
+  if (!/^\s+</.test(lineStr)) return lineStr;
+
+  const reg = /\s*?(?<!<\/)<(?<tagName>[\w-]*[.]?[\w]*)/g;
+
+  const exec = reg.exec(lineStr);
+
+  if (exec.groups["tagName"]) {
+    lineStr = lineStr.replace(exec.groups["tagName"], `${exec.groups["tagName"]} data-code-location="${path}:${line}"`);
   }
 
-  const reg = /((((^(\s)+\<))|(^\<))[\w-]+)|(<\/template)/g;
-  let leftTagList: RegExpMatchArray | string[] | null = lineStr.match(reg);
-
-  if (leftTagList) {
-    leftTagList = Array.from(new Set(leftTagList));
-
-    leftTagList.forEach((item) => {
-      const skip = ["KeepAlive", "template", "keep-alive", "transition", "router-view"];
-      if (item && !skip.some((i) => item.indexOf(i) > -1)) {
-        const reg = new RegExp(`${item}`);
-        const location = `${item} code-location="${path}:${line}"`;
-        lineStr = lineStr.replace(reg, location);
-      }
-    });
-  }
   return lineStr;
 };
