@@ -22,13 +22,13 @@ export interface PluginOptionProp {
   port: number;
 }
 
-export class codePositionServer {
+export class codePositionServer implements PluginOptionProp {
   server: Server | undefined;
-  options: PluginOptionProp;
+  port: number;
 
   constructor(options: PluginOptionProp) {
-    this.options = options;
     this.server = undefined;
+    this.port = options.port;
   }
 
   // compiler 包含了 当前 webpack 环境的各种配置信息，以及关于模块和编译的所有信息。
@@ -38,8 +38,6 @@ export class codePositionServer {
     compiler.hooks.done.tap("codePositionServer", (compilation) => {
       // 在回调函数中拿到参数 compilation
       // 执行一些逻辑
-
-      const { port } = this.options;
       if (this.server) return;
 
       this.server = http.createServer((req, _) => {
@@ -55,7 +53,7 @@ export class codePositionServer {
         }
       });
 
-      this.server.listen(port, () => console.log(`codePositionServer 插件开启在端口 ${port}`));
+      this.server.listen(this.port, () => console.log(`codePositionServer 插件开启在端口 ${this.port}`));
     });
   }
 }

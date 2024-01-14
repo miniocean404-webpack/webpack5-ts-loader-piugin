@@ -27,24 +27,18 @@ interface LoaderOption {
 
 // 插件无法应用与懒加载的页面
 export default function (this: LoaderContext<LoaderOption>, source: string, inputSourceMap?: Record<string, any>) {
-  if (typeof this.query !== "string") {
-    this.query.frame;
+  const options = this.getOptions();
 
-    // this.resourcePath 为当前编译文件的源路径
-    // this.query 是 loader 传入的 option
-    const res = codeLineTrack(source, this.resourcePath);
-    return res;
-  }
+  // this.resourcePath 为当前编译文件的源路径
+  // 使用 this.getOptions() 替代来自 loader-utils 中的 getOptions 方法 | this.query 是 loader 传入的 option
+  return (
+    source
+      .split("\n")
+      // 添加位置属性，index+1为具体的代码行号
+      .map((item, index) => addLineAttr(item, index + 1, this.resourcePath))
+      .join("\n")
+  );
 }
-
-const codeLineTrack = (code: string, path: string) => {
-  let lineList = code.split("\n");
-
-  // 添加位置属性，index+1为具体的代码行号
-  lineList = lineList.map((item, index) => addLineAttr(item, index + 1, path));
-
-  return lineList.join("\n");
-};
 
 const addLineAttr = (lineStr: string, line: number, path: string): string => {
   if (!/^\s+</.test(lineStr)) return lineStr;
