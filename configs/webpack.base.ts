@@ -25,7 +25,8 @@ const config: Configuration = {
           options: {
             // transpileOnly: true,
             compilerOptions: {
-              module: "NodeNext",
+              module: "ESNext",
+              moduleResolution: "Bundler",
             },
           },
         },

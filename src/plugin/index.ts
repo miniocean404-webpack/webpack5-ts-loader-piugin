@@ -22,7 +22,7 @@ export interface PluginOptionProp {
   port: number;
 }
 
-class codePositionServer {
+export class codePositionServer {
   server: Server | undefined;
   options: PluginOptionProp;
 
@@ -61,5 +61,3 @@ class codePositionServer {
     });
   }
 }
-
-export default codePositionServer;

@@ -8,7 +8,7 @@ const config: Configuration = {
   // 对于 entry 的绝对路径 使用 context 作为基础路径
   context: webpackPaths.srcPath,
 
-  target: "node",
+  target: ["node"],
 
   // 监听文件改变实时输出
   watch: true,
@@ -26,7 +26,7 @@ const config: Configuration = {
     filename: "[name].[contenthash:5].js",
     chunkFilename: "[id].js",
     library: {
-      type: "umd",
+      type: "umd2",
       // 指定的就是你使用require时的模块名
       name: "MyLibrary",
       // 默认导出为 default

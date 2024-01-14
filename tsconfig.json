@@ -14,7 +14,7 @@
 
     // 生成类型声明文件
     "declaration": true,
-    "declarationDir": "./lib/types",
+    "declarationDir": "./lib",
     "declarationMap": false,
     "rootDir": "./src", // 指定源文件的根文件夹
 

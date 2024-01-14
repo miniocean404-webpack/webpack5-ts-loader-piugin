@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "commonjs",
   "exports": {
-    "./plugin": "./lib/plugin.js",
-    "./loader": "./lib/loader.js",
+    "./plugin": "./lib/plugin/index.js",
+    "./loader": "./lib/loader/index.js",
     "./web": "./lib/web.js"
   },
   "scripts": {
