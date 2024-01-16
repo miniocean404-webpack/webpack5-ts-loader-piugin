@@ -25,6 +25,8 @@ interface LoaderOption {
   frame: "react" | "vue";
 }
 
+export const loaderPath = __filename;
+
 // 插件无法应用与懒加载的页面
 export default function (this: LoaderContext<LoaderOption>, source: string, inputSourceMap?: Record<string, any>) {
   const options = this.getOptions();
