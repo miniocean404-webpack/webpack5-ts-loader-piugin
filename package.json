@@ -11,9 +11,10 @@
   },
   "scripts": {
     "dev": "tsc -w --module esnext --moduleResolution Classic --outDir ./lib/es",
-    "build:es": "tsc  --module esnext --target esnext --outDir ./lib/es",
-    "build:cjs": "tsc  --module commonjs --target esnext --outDir ./lib/cjs",
-    "build": "tsc -b"
+    "build": "concurrently 'npm run build:es' 'npm run build:cjs' 'npm run build:umd'",
+    "build:es": "tsc --module esnext --target esnext --outDir ./lib/es",
+    "build:cjs": "tsc --module commonjs --target esnext --outDir ./lib/cjs",
+    "build:umd": "tsc --module umd --target esnext --outDir ./lib/umd"
   },
   "keywords": [],
   "author": "",
