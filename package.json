@@ -12,7 +12,8 @@
   "scripts": {
     "dev": "webpack --config ./configs/webpack.config.dev.ts --progress",
     "build": "webpack --config ./configs/webpack.config.prod.ts",
-    "build:analyzer": "cross-env ANALYZE=true webpack --config ./configs/webpack.config.prod.ts"
+    "build:analyzer": "cross-env ANALYZE=true webpack --config ./configs/webpack.config.prod.ts",
+    "tsc-dev": "tsc -w "
   },
   "keywords": [],
   "author": "",
