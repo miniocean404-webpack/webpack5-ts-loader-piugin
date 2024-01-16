@@ -12,21 +12,21 @@
 
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "module": "UMD",
+    "module": "NodeNext",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
 
     // 生成类型声明文件
     "declaration": true,
-    "declarationDir": "./lib",
+    "declarationDir": "./lib/@types",
     "declarationMap": false,
 
     /* Node mode */
-    // "moduleResolution": "",
+    "moduleResolution": "NodeNext",
     "allowImportingTsExtensions": false, // 允许导入 tsx 等其他扩展名
     "emitDeclarationOnly": false, // 输出 .d.ts 不输出 js 文件
     "noEmit": false, // 不输出文件
-    // "resolveJsonModule": true,
+    "resolveJsonModule": false,
     "isolatedModules": true,
 
     "allowJs": true,
